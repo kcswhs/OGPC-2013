@@ -1,0 +1,11 @@
+import java.awt.Image;
+
+public class Player 
+{
+	private Image Dude;
+	
+	Player()
+	{
+		
+	}
+}

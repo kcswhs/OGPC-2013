@@ -1,0 +1,51 @@
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+public class DisplayPanel extends JPanel implements KeyListener
+{
+	
+	
+	public DisplayPanel()
+	{
+		loadImage();
+        setSurfaceSize();
+	}
+	
+	public void loadImage()
+	{
+		Block = new ImageIcon("data/Block.png").getImage();
+        Wall = new ImageIcon("data/Wall.png").getImage();
+        Dude = new ImageIcon("data/Dude.png").getImage();
+	}
+	
+	public void setSurfaceSize()
+	{
+		Dimension d = new Dimension();
+        d.width = 600;
+        d.height = 400;
+        setPreferredSize(d); 
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

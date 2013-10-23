@@ -1,0 +1,64 @@
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+public class Main extends JFrame implements KeyListener
+{
+	DisplayPanel canvas = new DisplayPanel();
+	DisplayPanel test = new DisplayPanel();
+	
+	public Main() 
+	{
+        initUI();
+    }
+
+    private void initUI() 
+    {
+        setTitle("Dehk");
+
+        //add(canvas);
+
+        pack();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setLocationRelativeTo(null);
+    }
+    
+	public static void main(String[] args) 
+	{
+		SwingUtilities.invokeLater(new Runnable() 
+		{
+            public void run()
+            {
+            	Main ex = new Main();
+                ex.setVisible(true);
+                ex.setFocusable(true);
+            }
+        });
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+		{
+			System.out.println("HERE");
+			add(test);
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+}

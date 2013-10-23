@@ -1,0 +1,13 @@
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+
+public class Player 
+{
+	Image Dude;
+	
+	Player()
+	{
+		Dude = new ImageIcon("data/Dude.png").getImage();
+	}
+}

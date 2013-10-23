@@ -1,0 +1,164 @@
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.GeneralPath;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+public class DisplayPanel extends JPanel implements MouseListener, KeyListener
+{
+	private Image Wall;
+    private Image Block;
+    private Image Dude;
+    GeneralPath path;
+    private boolean drawing;
+    ArrayList<Point> points;
+    Timer t = new Timer();
+	
+	public DisplayPanel()
+	{
+		points = new ArrayList<Point>();
+		path = null;
+		drawing = false;
+		loadImage();
+        setSurfaceSize();
+        setFocusable(true);
+        addKeyListener(this);
+        addMouseListener(this);
+        t.schedule(new TimerTask() 
+        {
+            public void run() 
+            {
+                repaint();
+            }
+        }, 1000);
+	}
+	
+	public void loadImage()
+	{
+		Block = new ImageIcon("data/Block.png").getImage();
+        Wall = new ImageIcon("data/Wall.png").getImage();
+        Dude = new ImageIcon("data/Dude.png").getImage();
+	}
+	
+	public void setSurfaceSize()
+	{
+		Dimension d = new Dimension();
+        d.width = 600;
+        d.height = 400;
+        setPreferredSize(d); 
+	}
+	
+	public void paintComponent(Graphics g) 
+    {
+        super.paintComponent(g);
+        
+        g.drawImage(Dude, 40, 320, null);
+        
+        if (points.size() >= 2)
+        {
+        	System.out.println("HERE");
+        	for (int i = 1; i < points.size(); i++)
+        	{
+        		g.drawLine(points.get(i-1).x, points.get(i-1).y, points.get(i).x, points.get(i).y);
+        	}
+        }
+        /*Graphics2D g2d = (Graphics2D) g;
+          if (path != null) 
+          {
+            g2d.draw(path);
+          }*/
+        
+    }
+
+	@Override
+	public void keyPressed(KeyEvent e) 
+	{
+		if (e.getKeyCode() == KeyEvent.VK_0)
+		{
+			points.remove(points.size() - 1);
+		}
+		
+		//repaint();
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) 
+	{
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) 
+	{
+		PointerInfo p = MouseInfo.getPointerInfo();
+        Point point = new Point(p.getLocation());
+        SwingUtilities.convertPointFromScreen(point, this);
+		points.add(point);
+		for (int i = 0; i < points.size(); i++)
+    	{
+    		System.out.println(points.get(i));
+    		System.out.println(points.size());
+    	}
+		
+		/*PointerInfo p = MouseInfo.getPointerInfo();
+        Point point = new Point(p.getLocation());
+        SwingUtilities.convertPointFromScreen(point, this);
+        if (!drawing && point.x > 40 && point.x < 80 && point.y > 320 && point.y < 360) 
+        {
+            path = new GeneralPath();
+            path.moveTo(point.x, point.y);
+            drawing = true;
+        } 
+        else if (drawing && drawPower <= 0)
+        {
+            path.lineTo(point.x, point.y);
+        }
+
+        repaint();*/
+		//repaint();
+	}
+	
+	@Override
+	public void mouseEntered(MouseEvent e) 
+	{
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) 
+	{
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) 
+	{
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) 
+	{
+		
+	}
+}

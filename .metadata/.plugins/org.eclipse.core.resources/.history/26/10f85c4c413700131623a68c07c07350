@@ -1,0 +1,23 @@
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+
+public class Player 
+{
+	Image Dude;
+	private int playerX;
+	private int playerY;
+	
+	Player()
+	{
+		Dude = new ImageIcon("data/Dude.png").getImage();
+		playerX = 40;
+		playerY = 320;
+	}
+	
+	public void drawPlayer(Graphics g)
+	{
+		g.drawImage(Dude, 40, 320, null);
+	}
+}
