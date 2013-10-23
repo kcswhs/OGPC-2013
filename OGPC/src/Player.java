@@ -1,6 +1,8 @@
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 
@@ -11,6 +13,8 @@ public class Player
 	private int playerY;
 	public int moveDistance;
 	Point playerPoint;
+	Timer jump = new Timer();
+	int store;
 	
 	Player()
 	{
@@ -55,6 +59,16 @@ public class Player
 			playerX -= addX;
 			playerY -= addY;
 		}
+	}
+	
+	public void jump(double spaceTimeInMS)
+	{
+		playerY -= spaceTimeInMS * .00000000001;
+	}
+	
+	public void store()
+	{
+		store = playerX;
 	}
 	
 	public boolean onPlayer(Point point)

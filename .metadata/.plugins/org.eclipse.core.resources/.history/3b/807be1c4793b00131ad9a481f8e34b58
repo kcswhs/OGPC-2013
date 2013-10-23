@@ -1,0 +1,77 @@
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.ImageIcon;
+
+public class Player 
+{
+	Image player;
+	private int playerX;
+	private int playerY;
+	public int moveDistance;
+	Point playerPoint;
+	Timer jump = new Timer();
+	
+	Player()
+	{
+		player = new ImageIcon("data/Dude.png").getImage();
+		playerX = 20;
+		playerY = 20;
+		playerPoint = new Point(playerX + 20, playerY + 20);
+		moveDistance = 20;
+		//playerPoint.setLocation(new Point(playerX + 20, playerY + 20));
+	}
+	
+	public void drawPlayer(Graphics g)
+	{
+		g.drawImage(player, playerX, playerY, null);
+	}
+	
+	public Point updatePoint()
+	{
+		int pointX = playerX + 20;
+		int pointY = playerY + 20;
+		playerPoint = new Point(pointX, pointY);
+		
+		return playerPoint;
+	}
+	
+	public boolean check()
+	{
+		boolean move = false;
+		
+		if (playerX >= 0 && playerX < 600 - moveDistance && playerY >= 0 && playerY < 400 - moveDistance)
+			move = true;
+		
+		return move;
+	}
+	
+	public void movePlayer(int addX, int addY)
+	{
+		playerX += addX;
+		playerY += addY;
+		if (!check())
+		{
+			playerX -= addX;
+			playerY -= addY;
+		}
+	}
+	
+	public void jump(int spaceTimeInMS)
+	{
+		
+	}
+	
+	public boolean onPlayer(Point point)
+	{
+		boolean addPoint = false;
+		
+		if (point.x > playerX && point.x < playerX + player.getWidth(null) && point.y > playerY && point.y < point.y + player.getHeight(null))
+			addPoint = true;
+		
+		return addPoint;
+	}
+}

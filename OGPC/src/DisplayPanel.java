@@ -28,6 +28,8 @@ public class DisplayPanel extends JPanel implements MouseListener, KeyListener
     ArrayList<Point> points;
     ArrayList<Point> pointsTest;
     Timer t = new Timer();
+    Timer space = new Timer();
+    float spaceCounter;
 	
 	public DisplayPanel()
 	{
@@ -35,6 +37,7 @@ public class DisplayPanel extends JPanel implements MouseListener, KeyListener
 		pointsTest = new ArrayList<Point>();
 		p1 = new Player();
 		drawing = false;
+		spaceCounter = 0;
 		//path = null;
 		loadImage();
         setSurfaceSize();
@@ -99,6 +102,23 @@ public class DisplayPanel extends JPanel implements MouseListener, KeyListener
         pointsTest.add(point);
         
 	}
+	
+	public boolean spaceDown()
+	{
+		boolean jump = true;
+		
+		if (spaceCounter < .5)
+			spaceCounter += .1;
+		else
+		{
+			jump = false;
+			spaceCounter -= spaceCounter;
+		}
+		if (!jump)
+			spaceCounter -= .1;
+		
+		return jump;
+	}
 
 	public void keyPressed(KeyEvent e) 
 	{
@@ -123,11 +143,34 @@ public class DisplayPanel extends JPanel implements MouseListener, KeyListener
 		{
 			p1.movePlayer(p1.moveDistance, 0);
 		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+		{
+			if (spaceCounter == 0)
+				p1.store();
+			spaceDown();
+        	p1.jump(spaceCounter);
+			/*space.schedule(new TimerTask()
+	        {
+	            public void run()
+	            {
+	            	spaceDown();
+	            	p1.jump(spaceCounter);
+	            }
+	        }, 100, 1);*/
+		}
 	}
 
 	public void keyReleased(KeyEvent e)
 	{
-		
+		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+		{
+			/*space.cancel();
+			space.purge();
+			space = new Timer();*/
+			System.out.println(spaceCounter);
+			spaceCounter = 0;
+			//p1.jump(spaceCounter);
+		}
 	}
 
 	public void keyTyped(KeyEvent e) 
