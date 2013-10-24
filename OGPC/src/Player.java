@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,6 +16,8 @@ public class Player
 	Point playerPoint;
 	Timer jump = new Timer();
 	int store;
+	int width;
+	int height;
 	
 	Player()
 	{
@@ -24,11 +27,14 @@ public class Player
 		playerPoint = new Point(playerX + 20, playerY + 20);
 		moveDistance = 20;
 		//playerPoint.setLocation(new Point(playerX + 20, playerY + 20));
+		Toolkit tk = Toolkit.getDefaultToolkit();  
+		width = ((int) tk.getScreenSize().getWidth());  
+		height = ((int) tk.getScreenSize().getHeight()); 
 	}
 	
 	public void drawPlayer(Graphics g)
 	{
-		g.drawImage(player, playerX, playerY, null);
+		g.drawImage(player, playerX, playerY,  null);
 	}
 	
 	public Point updatePoint()
@@ -44,7 +50,7 @@ public class Player
 	{
 		boolean move = false;
 		
-		if (playerX >= 0 && playerX < 600 - moveDistance && playerY >= 0 && playerY < 400 - moveDistance)
+		if (playerX >= 0 && playerX < width - player.getWidth(null) && playerY >= 0 && playerY < height - player.getHeight(null))
 			move = true;
 		
 		return move;

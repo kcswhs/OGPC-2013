@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -15,6 +16,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -24,6 +26,7 @@ public class DisplayPanel extends JPanel implements MouseListener, KeyListener
     private Image Block;
     private Player p1;
     private boolean drawing;
+    JFrame frame;
     //GeneralPath path;
     ArrayList<Point> points;
     ArrayList<Point> pointsTest;
@@ -31,7 +34,7 @@ public class DisplayPanel extends JPanel implements MouseListener, KeyListener
     Timer space = new Timer();
     float spaceCounter;
 	
-	public DisplayPanel()
+	public DisplayPanel(JFrame test)
 	{
 		points = new ArrayList<Point>();
 		pointsTest = new ArrayList<Point>();
@@ -44,6 +47,7 @@ public class DisplayPanel extends JPanel implements MouseListener, KeyListener
         setFocusable(true);
         addKeyListener(this);
         addMouseListener(this);
+        frame = test;
         t.schedule(new TimerTask() 
         {
             public void run() 
@@ -64,8 +68,13 @@ public class DisplayPanel extends JPanel implements MouseListener, KeyListener
 	public void setSurfaceSize()
 	{
 		Dimension d = new Dimension();
-        d.width = 600;
-        d.height = 400;
+		
+		Toolkit tk = Toolkit.getDefaultToolkit();  
+		int width = ((int) tk.getScreenSize().getWidth());  
+		int height = ((int) tk.getScreenSize().getHeight());  
+		
+        d.width = width;
+        d.height = height;
         setPreferredSize(d); 
 	}
 	
@@ -157,6 +166,10 @@ public class DisplayPanel extends JPanel implements MouseListener, KeyListener
 	            	p1.jump(spaceCounter);
 	            }
 	        }, 100, 1);*/
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+		{
+			frame.dispose();
 		}
 	}
 

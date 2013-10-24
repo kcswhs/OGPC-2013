@@ -6,9 +6,11 @@ import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-public class Main extends JFrame
+public class Main
 {
-	DisplayPanel canvas = new DisplayPanel();
+	static Main ex;
+	JFrame frame = new JFrame();
+	DisplayPanel canvas;
 	
 	public Main() 
 	{
@@ -17,14 +19,22 @@ public class Main extends JFrame
 
     private void initUI() 
     {
-        setTitle("Dehk");
-
-        add(canvas);
+    	frame.setUndecorated(true);
+    	frame.setVisible(true);
+        frame.setTitle("Dehk");
+        
+        canvas = new DisplayPanel(frame);
+        frame.add(canvas);
         //setFocusable(true);
 
-        pack();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //setLocationRelativeTo(null);
+    }
+    
+    public void HIT_THE_BUTTON()
+    {
+    	frame.dispose();
     }
     
 	public static void main(String[] args) 
@@ -33,8 +43,7 @@ public class Main extends JFrame
 		{
             public void run()
             {
-            	Main ex = new Main();
-            	ex.setVisible(true);
+            	ex = new Main();
             }
         });
 	}
