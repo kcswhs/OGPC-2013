@@ -1,0 +1,15 @@
+public class PhysicsEngine 
+{
+	float v;
+	float dx;
+	float dy;
+	
+	PhysicsEngine()
+	{
+		v = 0;
+		dx = 0;
+		dy = 0;
+	}
+	
+	
+}

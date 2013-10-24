@@ -1,0 +1,21 @@
+public class PhysicsEngine 
+{
+	float v;
+	float dx;
+	float dy;
+	
+	PhysicsEngine()
+	{
+		v = 0;
+		dx = 0;
+		dy = 0;
+	}
+	
+	//dx = .5(vi + vf)dt
+	public float changeInX(float vi, float vf, float dt)
+	{
+		
+		
+		return dx;
+	}
+}
